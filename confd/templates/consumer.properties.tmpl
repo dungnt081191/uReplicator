@@ -1,0 +1,49 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+# 
+#    http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# see kafka.consumer.ConsumerConfig for more details
+
+# Zookeeper connection string
+# comma separated host:port pairs, each corresponding to a zk
+# server. e.g. "127.0.0.1:3000,127.0.0.1:3001,127.0.0.1:3002"
+# zookeeper.connect=127.0.0.1:2181/cluster1
+# bootstrap.servers=localhost:9093
+zookeeper.connect={{ getenv "SRC_ZK_CONNECT" }}
+bootstrap.servers={{ getenv "SRC_KF_CONNECT" }}
+# timeout in ms for connecting to zookeeper
+zookeeper.connection.timeout.ms=30000
+zookeeper.session.timeout.ms=30000
+
+#consumer group id
+group.id={{ getenv "CONSUMER_GROUP_ID" }}
+
+consumer.id={{ getenv "CONSUMER_ID" }}
+socket.receive.buffer.bytes=1048576
+fetch.message.max.bytes={{ getenv "FETCH.MESSAGE.BYTES" }}
+queued.max.message.chunks=5
+key.deserializer=org.apache.kafka.common.serialization.ByteArrayDeserializer
+value.deserializer=org.apache.kafka.common.serialization.ByteArrayDeserializer
+#consumer timeout
+#consumer.timeout.ms=5000
+
+auto.offset.reset={{ getenv "AUTO_OFFSET_RESET" }}
+
+#SSL
+security.protocol=SSL
+ssl.truststore.location={{ getenv "CSM_KAFKA_TRUSTSTORE_LOCATION" }}
+ssl.truststore.password={{ getenv "CSM_KAFKA_TRUSTSTORE_PASSWORD" }}
+#manager KAFKA_CLIENT_LOCATION
+ssl.keystore.location={{ getenv "CSM_KAFKA_CLIENT_LOCATION" }}
+ssl.keystore.password={{ getenv "CSM_KAFKA_CLIENT_PASSWORD" }}
+ssl.key.password={{ getenv "CSM_KAFKA_CLIENT_PASSWORD" }}

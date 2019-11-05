@@ -1,0 +1,9 @@
+zkServer={{ getenv "SRC_ZK_CONNECT" }}
+helixClusterName={{ getenv "HELIX_CLUSTER_NAME" }}
+federated.deployment.name={{ getenv "FEDERATED_DELOYMENT_NAME" }}
+
+#add
+enableAutowhitelist={{ getenv "AUTO_WHITELIST" }}
+port=9000
+srckafkaZkpath={{ getenv "SRC_ZK_CONNECT" }}
+destKafkaZkpath={{ getenv "DST_ZK_CONNECT" }}
